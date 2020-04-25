@@ -24,6 +24,10 @@ async function doLint(codeDocument: vscode.TextDocument, collection: vscode.Diag
   });
 }
 
+async function doUpdate(): Promise<void> {
+  Linter.update();
+}
+
 export function activate(context: vscode.ExtensionContext) {
   const commandId = 'extension.oelint';
   const diagnosticCollection = vscode.languages.createDiagnosticCollection(commandId);
@@ -40,4 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   vscode.commands.executeCommand(commandId);
   context.subscriptions.push(events);
+
+  // do auto update
+  doUpdate();
 }

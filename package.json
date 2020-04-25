@@ -4,7 +4,7 @@
   "description": "Lint your bitbake files",
   "license": "MIT",
   "homepage": "https://github.com/priv-kweihmann/oelint-vscode",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "kweihmann",
   "repository": {
     "type": "git",
@@ -40,5 +40,51 @@
   },
   "dependencies": {
     "tsc": "^1.20150623.0"
+  },
+  "contributes": {
+    "configuration": {
+      "title": "oelint-vscode",
+      "properties": {
+        "oelint-vscode.run.fix": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically resolve fixable issues"
+        },
+        "oelint-vscode.run.nobackup": {
+          "type": "boolean",
+          "default": true,
+          "description": "Don't create backups files while auto fixing"
+        },
+        "oelint-vscode.run.rules.custom": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Additional paths to search for custom rules"
+        },
+        "oelint-vscode.run.rules.nonstd": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Additional non-standard rulesets to load"
+        },
+        "oelint-vscode.run.suppress": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Error IDs to suppress automatically"
+        },
+        "oelint-vscode.update.auto": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically update oelint-adv tool"
+        }
+      }
+    }
   }
 }

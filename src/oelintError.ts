@@ -12,7 +12,7 @@ export function parseOelintError(error: string): OelintError {
     return getEmptyOelintError();
   }
 
-  const pattern = /^(.*):(\d+):((warning|error|info)):([a-z\.]*):(.*)$/;
+  const pattern = /^(.*):(\d+):((warning|error|info)):(.*?):(.*)$/;
 
   const match = error.match(pattern)
   if (match) {

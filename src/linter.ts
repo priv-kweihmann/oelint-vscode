@@ -15,6 +15,15 @@ export default class Linter {
     this.codeDocument = document;
   }
 
+  public static update():void {
+    const config = vscode.workspace.getConfiguration();
+    if (config.get("oelint-vscode.update.auto")) {
+      const exec = util.promisify(cp.exec);
+      const cmd = `pip3 install --upgrade --user oelint-adv`;
+      exec(cmd);
+    }
+  }
+
   public async lint(): Promise<LinterError[]> {
     const errors = await this.runProtoLint();
     if (!errors) {
@@ -41,11 +50,33 @@ export default class Linter {
     return result;
   }
 
+  private createAdditionalConfig(): Array<string> {
+    const config = vscode.workspace.getConfiguration();
+    let res: Array<string> = [];
+    if(config.get("oelint-vscode.run.fix")) {
+      res.push("--fix");
+      if(config.get("oelint-vscode.run.nobackup")) {
+        res.push("--nobackup");
+      }
+    }
+    for (var opt of <Array<string>>config.get("oelint-vscode.run.rules.custom")) {
+      res.push(`--customrules=${opt}`)
+    }
+    for (var opt of <Array<string>>config.get("oelint-vscode.run.rules.nonstd")) {
+      res.push(`--addrules=${opt}`)
+    }
+    for (var opt of <Array<string>>config.get("oelint-vscode.run.suppress")) {
+      res.push(`--suppress=${opt}`)
+    }
+   
+    return res;
+  }
+
   private async runProtoLint(): Promise<string> {
     const currentFile = this.codeDocument.uri.fsPath;
     const exec = util.promisify(cp.exec);
-
-    const cmd = `oelint-adv ${currentFile}`;
+    const addopt = this.createAdditionalConfig().join(" ")
+    const cmd = `oelint-adv ${addopt} ${currentFile}`;
 
     let lintResults: string = "";
     await exec(cmd).catch((error: any) => lintResults = error.stderr);
