@@ -55,6 +55,21 @@
           "default": true,
           "description": "Don't create backups files while auto fixing"
         },
+        "oelint-vscode.run.noinfo": {
+          "type": "boolean",
+          "default": false,
+          "description": "No info level issues"
+        },
+        "oelint-vscode.run.nowarn": {
+          "type": "boolean",
+          "default": false,
+          "description": "No warning level issues"
+        },
+        "oelint-vscode.run.constantfile": {
+          "type": "string",
+          "default": "",
+          "description": "Path to constant file"
+        },
         "oelint-vscode.run.rules.custom": {
           "type": "array",
           "default": [],

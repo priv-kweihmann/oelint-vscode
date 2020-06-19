@@ -68,6 +68,15 @@ export default class Linter {
     for (var opt of <Array<string>>config.get("oelint-vscode.run.suppress")) {
       res.push(`--suppress=${opt}`)
     }
+    if(config.get("oelint-vscode.run.noinfo")) {
+      res.push("--noinfo");
+    }
+    if(config.get("oelint-vscode.run.nowarn")) {
+      res.push("--nowarn");
+    }
+    if(config.get("oelint-vscode.run.constantfile")) {
+      res.push("--constantfile=" + <string>(config.get("oelint-vscode.run.constantfile")));
+    }
    
     return res;
   }
