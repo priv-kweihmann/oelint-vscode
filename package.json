@@ -98,6 +98,11 @@
           "type": "boolean",
           "default": true,
           "description": "Automatically update oelint-adv tool"
+        },
+        "oelint-vscode.update.user": {
+          "type": "boolean",
+          "default": true,
+          "description": "Update with --user switch"
         }
       }
     }

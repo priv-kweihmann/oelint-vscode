@@ -30,3 +30,4 @@ so 99.9% of the credit go to them
 | oelint-vscode.run.rules.nonstd | array[string] | []      | Additional non-standard rulesets to load     |
 | oelint-vscode.run.suppress     | array[string] | []      | Error IDs to suppress automatically          |
 | oelint-vscode.update.auto      | boolean       | true    | Automatically update oelint-adv tool         |
+| oelint-vscode.update.user      | boolean       | true    | Update with --user switch                    |

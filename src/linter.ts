@@ -19,8 +19,12 @@ export default class Linter {
     const config = vscode.workspace.getConfiguration();
     if (config.get("oelint-vscode.update.auto")) {
       const exec = util.promisify(cp.exec);
-      const cmd = `pip3 install --upgrade --user oelint-adv`;
-      exec(cmd);
+      let cmd: Array<string> = ["pip3", "install", "--upgrade"];
+      if (config.get("oelint-vscode.update.user")) {
+        cmd.push("--user")
+      }
+      cmd.push("oelint-adv")
+      exec(cmd.join(" "));
     }
   }
 
