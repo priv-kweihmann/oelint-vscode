@@ -81,7 +81,15 @@ export default class Linter {
     if(config.get("oelint-vscode.run.constantfile")) {
       res.push("--constantfile=" + <string>(config.get("oelint-vscode.run.constantfile")));
     }
-   
+    for (var opt of <Array<string>>config.get("oelint-vscode.run.constmodadd")) {
+      res.push("--constantmods=+${opt}")
+    }
+    for (var opt of <Array<string>>config.get("oelint-vscode.run.constmodrem")) {
+      res.push("--constantmods=-${opt}")
+    }
+    for (var opt of <Array<string>>config.get("oelint-vscode.run.constmodovr")) {
+      res.push("--constantmods=${opt}")
+    }
     return res;
   }
 

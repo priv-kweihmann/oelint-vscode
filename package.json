@@ -68,7 +68,31 @@
         "oelint-vscode.run.constantfile": {
           "type": "string",
           "default": "",
-          "description": "Path to constant file"
+          "description": "Path to constant file [DEPRECATED]"
+        },
+        "oelint-vscode.run.constmodadd": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Constants to add to DB"
+        },
+        "oelint-vscode.run.constmodrem": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Constants to remove from DB"
+        },
+        "oelint-vscode.run.constmodovr": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Constants to override in DB"
         },
         "oelint-vscode.run.rules.custom": {
           "type": "array",
