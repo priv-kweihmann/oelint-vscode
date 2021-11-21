@@ -94,13 +94,24 @@ export default class Linter {
   }
 
   private async runProtoLint(): Promise<string> {
+    let wspath = process.cwd()
+    if(vscode.workspace.workspaceFolders !== undefined) {
+      wspath = vscode.workspace.workspaceFolders[0].uri.path; 
+    }
     const currentFile = this.codeDocument.uri.fsPath;
     const exec = util.promisify(cp.exec);
     const addopt = this.createAdditionalConfig().join(" ")
     const cmd = `oelint-adv ${addopt} ${currentFile}`;
 
     let lintResults: string = "";
+    const curdir = process.cwd()
+
+    if (curdir != wspath) {
+      process.chdir(wspath)
+    }
     await exec(cmd).catch((error: any) => lintResults = error.stderr);
+
+    process.chdir(curdir)
 
     return lintResults;
   }
