@@ -4,7 +4,7 @@
   "description": "Lint your bitbake files",
   "license": "MIT",
   "homepage": "https://github.com/priv-kweihmann/oelint-vscode",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "publisher": "kweihmann",
   "repository": {
     "type": "git",
