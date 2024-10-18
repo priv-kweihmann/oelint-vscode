@@ -15,7 +15,7 @@ export default class Linter {
     this.codeDocument = document;
   }
 
-  public static update():void {
+  public static update(): void {
     const config = vscode.workspace.getConfiguration();
     if (config.get("oelint-vscode.update.auto")) {
       const exec = util.promisify(cp.exec);
@@ -57,9 +57,9 @@ export default class Linter {
   private createAdditionalConfig(): Array<string> {
     const config = vscode.workspace.getConfiguration();
     let res: Array<string> = [];
-    if(config.get("oelint-vscode.run.fix")) {
+    if (config.get("oelint-vscode.run.fix")) {
       res.push("--fix");
-      if(config.get("oelint-vscode.run.nobackup")) {
+      if (config.get("oelint-vscode.run.nobackup")) {
         res.push("--nobackup");
       }
     }
@@ -72,13 +72,13 @@ export default class Linter {
     for (var opt of <Array<string>>config.get("oelint-vscode.run.suppress")) {
       res.push(`--suppress=${opt}`)
     }
-    if(config.get("oelint-vscode.run.noinfo")) {
+    if (config.get("oelint-vscode.run.noinfo")) {
       res.push("--noinfo");
     }
-    if(config.get("oelint-vscode.run.nowarn")) {
+    if (config.get("oelint-vscode.run.nowarn")) {
       res.push("--nowarn");
     }
-    if(config.get("oelint-vscode.run.constantfile")) {
+    if (config.get("oelint-vscode.run.constantfile")) {
       res.push("--constantfile=" + <string>(config.get("oelint-vscode.run.constantfile")));
     }
     for (var opt of <Array<string>>config.get("oelint-vscode.run.constmodadd")) {
@@ -90,13 +90,19 @@ export default class Linter {
     for (var opt of <Array<string>>config.get("oelint-vscode.run.constmodovr")) {
       res.push(`--constantmods=${opt}`)
     }
+    if (config.get("oelint-vscode.run.cached")) {
+      res.push("--cached");
+      if (config.get("oelint-vscode.run.cache-path")) {
+        res.push("--cachedir=" + <string>(config.get("oelint-vscode.run.cache-path")));
+      }
+    }
     return res;
   }
 
   private async runProtoLint(): Promise<string> {
     let wspath = process.cwd()
-    if(vscode.workspace.workspaceFolders !== undefined) {
-      wspath = vscode.workspace.workspaceFolders[0].uri.path; 
+    if (vscode.workspace.workspaceFolders !== undefined) {
+      wspath = vscode.workspace.workspaceFolders[0].uri.path;
     }
     const currentFile = this.codeDocument.uri.fsPath;
     const exec = util.promisify(cp.exec);

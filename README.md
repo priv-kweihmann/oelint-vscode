@@ -21,6 +21,8 @@ so 99.9% of the credit go to them
 
 | key                            | type          | default | description                                  |
 | ------------------------------ | ------------- | ------- | -------------------------------------------- |
+| oelint-vscode.run.cache-path   | string        | ''      | Custom path to local caches                  |
+| oelint-vscode.run.cached       | boolean       | true    | run with local caches                        |
 | oelint-vscode.run.constantfile | string        | ''      | Path to constant file                        |
 | oelint-vscode.run.fix          | boolean       | false   | Automatically resolve fixable issues         |
 | oelint-vscode.run.nobackup     | boolean       | true    | Don't create backups files while auto fixing |

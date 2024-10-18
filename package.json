@@ -4,7 +4,7 @@
   "description": "Lint your bitbake files",
   "license": "MIT",
   "homepage": "https://github.com/priv-kweihmann/oelint-vscode",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "publisher": "kweihmann",
   "repository": {
     "type": "git",
@@ -127,6 +127,16 @@
           "type": "boolean",
           "default": true,
           "description": "Update with --user switch"
+        },
+        "oelint-vscode.run.cached": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run with local caches"
+        },
+        "oelint-vscode.run.cache-path": {
+          "type": "string",
+          "default": "",
+          "description": "Custom path to local caches"
         }
       }
     }
