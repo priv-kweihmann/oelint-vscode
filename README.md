@@ -19,17 +19,18 @@ so 99.9% of the credit go to them
 
 ## Configuration
 
-| key                            | type          | default | description                                  |
-| ------------------------------ | ------------- | ------- | -------------------------------------------- |
-| oelint-vscode.run.cache-path   | string        | ''      | Custom path to local caches                  |
-| oelint-vscode.run.cached       | boolean       | true    | run with local caches                        |
-| oelint-vscode.run.constantfile | string        | ''      | Path to constant file                        |
-| oelint-vscode.run.fix          | boolean       | false   | Automatically resolve fixable issues         |
-| oelint-vscode.run.nobackup     | boolean       | true    | Don't create backups files while auto fixing |
-| oelint-vscode.run.noinfo       | boolean       | false   | No info level issues                         |
-| oelint-vscode.run.nowarn       | boolean       | false   | No warning level issues                      |
-| oelint-vscode.run.rules.custom | array[string] | []      | Additional paths to search for custom rules  |
-| oelint-vscode.run.rules.nonstd | array[string] | []      | Additional non-standard rulesets to load     |
-| oelint-vscode.run.suppress     | array[string] | []      | Error IDs to suppress automatically          |
-| oelint-vscode.update.auto      | boolean       | true    | Automatically update oelint-adv tool         |
-| oelint-vscode.update.user      | boolean       | true    | Update with --user switch                    |
+| key                            | type          | default | description                                         |
+| ------------------------------ | ------------- | ------- | --------------------------------------------------- |
+| oelint-vscode.run.cache-path   | string        | ''      | Custom path to local caches                         |
+| oelint-vscode.run.cached       | boolean       | true    | run with local caches                               |
+| oelint-vscode.run.constantfile | string        | ''      | Path to constant file                               |
+| oelint-vscode.run.fix          | boolean       | false   | Automatically resolve fixable issues                |
+| oelint-vscode.run.nobackup     | boolean       | true    | Don't create backups files while auto fixing        |
+| oelint-vscode.run.noinfo       | boolean       | false   | No info level issues                                |
+| oelint-vscode.run.nowarn       | boolean       | false   | No warning level issues                             |
+| oelint-vscode.run.release      | string        | ''      | Yocto project release name to use (default: latest) |
+| oelint-vscode.run.rules.custom | array[string] | []      | Additional paths to search for custom rules         |
+| oelint-vscode.run.rules.nonstd | array[string] | []      | Additional non-standard rulesets to load            |
+| oelint-vscode.run.suppress     | array[string] | []      | Error IDs to suppress automatically                 |
+| oelint-vscode.update.auto      | boolean       | true    | Automatically update oelint-adv tool                |
+| oelint-vscode.update.user      | boolean       | true    | Update with --user switch                           |

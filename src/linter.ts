@@ -96,6 +96,9 @@ export default class Linter {
         res.push("--cachedir=" + <string>(config.get("oelint-vscode.run.cache-path")));
       }
     }
+    if (config.get("oelint-vscode.run.release")) {
+      res.push("--release=" + <string>(config.get("oelint-vscode.run.release")));
+    }
     return res;
   }
 

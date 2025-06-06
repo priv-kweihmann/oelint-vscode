@@ -4,7 +4,7 @@
   "description": "Lint your bitbake files",
   "license": "MIT",
   "homepage": "https://github.com/priv-kweihmann/oelint-vscode",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "publisher": "kweihmann",
   "repository": {
     "type": "git",
@@ -132,6 +132,11 @@
           "type": "string",
           "default": "",
           "description": "Custom path to local caches"
+        },
+        "oelint-vscode.run.release": {
+          "type": "string",
+          "default": "",
+          "description": "Yocto project release name to use (default: latest)"
         }
       }
     }
