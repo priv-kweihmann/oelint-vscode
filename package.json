@@ -4,7 +4,7 @@
   "description": "Lint your bitbake files",
   "license": "MIT",
   "homepage": "https://github.com/priv-kweihmann/oelint-vscode",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "publisher": "kweihmann",
   "repository": {
     "type": "git",
@@ -137,6 +137,20 @@
           "type": "string",
           "default": "",
           "description": "Yocto project release name to use (default: latest)"
+        },
+        "oelint-vscode.run.mode": {
+          "type": "string",
+          "default": "fast",
+          "enum": ["fast", "all"],
+          "description": "Mode to run in"
+        },
+        "oelint-vscode.run.extra-layer": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Extra layer constant data to load"
         }
       }
     }

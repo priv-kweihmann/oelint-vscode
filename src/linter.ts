@@ -63,6 +63,9 @@ export default class Linter {
         res.push("--nobackup");
       }
     }
+    for (var opt of <Array<string>>config.get("oelint-vscode.run.extra-layer")) {
+      res.push(`--extra-layer=${opt}`)
+    }
     for (var opt of <Array<string>>config.get("oelint-vscode.run.rules.custom")) {
       res.push(`--customrules=${opt}`)
     }
@@ -72,11 +75,14 @@ export default class Linter {
     for (var opt of <Array<string>>config.get("oelint-vscode.run.suppress")) {
       res.push(`--suppress=${opt}`)
     }
+    if (config.get("oelint-vscode.run.mode")) {
+      res.push("--mode=" + <string>(config.get("oelint-vscode.run.mode")));;
+    }
     if (config.get("oelint-vscode.run.noinfo")) {
-      res.push("--noinfo");
+      res.push("--hide=info");
     }
     if (config.get("oelint-vscode.run.nowarn")) {
-      res.push("--nowarn");
+      res.push("--hide=warning");
     }
     if (config.get("oelint-vscode.run.constantfile")) {
       res.push("--constantfile=" + <string>(config.get("oelint-vscode.run.constantfile")));
