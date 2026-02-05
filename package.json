@@ -65,6 +65,11 @@
           "default": "",
           "description": "Path to constant file [DEPRECATED]"
         },
+        "oelint-vscode.run.rulefile": {
+          "type": "string",
+          "default": ".oelint.cfg",
+          "description": "Path to the rule file"
+        },
         "oelint-vscode.run.constmodadd": {
           "type": "array",
           "default": [],
