@@ -67,7 +67,7 @@
         },
         "oelint-vscode.run.rulefile": {
           "type": "string",
-          "default": ".oelint.cfg",
+          "default": "",
           "description": "Path to the rule file"
         },
         "oelint-vscode.run.constmodadd": {
