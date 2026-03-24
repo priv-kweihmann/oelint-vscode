@@ -1,9 +1,16 @@
+import * as cp from 'child_process';
+import * as util from 'util';
 import * as vscode from 'vscode';
 import Linter, { LinterError } from './linter';
 
-async function doLint(codeDocument: vscode.TextDocument, collection: vscode.DiagnosticCollection): Promise<void> {
-  const linter = new Linter(codeDocument);
+async function doLint(
+  codeDocument: vscode.TextDocument,
+  collection: vscode.DiagnosticCollection,
+  output: vscode.OutputChannel
+): Promise<void> {
+  const linter = new Linter(codeDocument, output);
   const errors: LinterError[] = await linter.lint();
+  output.appendLine(`Parsed errors: ${errors.length}`);
 
   const uniqueFiles: string[] = errors.map(f => { return f.proto.file });
 
@@ -28,9 +35,19 @@ async function doUpdate(): Promise<void> {
   Linter.update();
 }
 
+async function logOelintVersion(output: vscode.OutputChannel): Promise<void> {
+  const exec = util.promisify(cp.exec);
+  await exec("oelint-adv --version")
+    .then((result: { stdout: string }) => output.appendLine(`oelint-adv version: ${result.stdout.trim()}`))
+    .catch(() => output.appendLine("oelint-adv version: unknown"));
+}
+
 export function activate(context: vscode.ExtensionContext) {
   const commandId = 'extension.oelint';
   const diagnosticCollection = vscode.languages.createDiagnosticCollection(commandId);
+  const output = vscode.window.createOutputChannel('oelint-adv');
+  output.appendLine('oelint-adv extension activated');
+  logOelintVersion(output);
 
   let events = vscode.commands.registerCommand(commandId, () => {
     vscode.workspace.onDidSaveTextDocument((document: vscode.TextDocument) => {
@@ -38,12 +55,15 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      doLint(document, diagnosticCollection);
+      output.appendLine(`Linting on save: ${document.uri.fsPath}`);
+      output.show(true);
+      doLint(document, diagnosticCollection, output);
     });
   });
 
   vscode.commands.executeCommand(commandId);
   context.subscriptions.push(events);
+  context.subscriptions.push(output);
 
   // do auto update
   doUpdate();

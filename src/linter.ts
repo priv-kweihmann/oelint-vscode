@@ -10,9 +10,11 @@ export interface LinterError {
 
 export default class Linter {
   private codeDocument: vscode.TextDocument;
+  private output?: vscode.OutputChannel;
 
-  constructor(document: vscode.TextDocument) {
+  constructor(document: vscode.TextDocument, output?: vscode.OutputChannel) {
     this.codeDocument = document;
+    this.output = output;
   }
 
   public static update(): void {
@@ -120,14 +122,19 @@ export default class Linter {
     const exec = util.promisify(cp.exec);
     const addopt = this.createAdditionalConfig().join(" ")
     const cmd = `oelint-adv ${addopt} ${currentFile}`;
-
+    this.output?.appendLine(`Executing: ${cmd}`);
     let lintResults: string = "";
     const curdir = process.cwd()
 
     if (curdir != wspath) {
       process.chdir(wspath)
     }
-    await exec(cmd).catch((error: any) => lintResults = error.stderr);
+    await exec(cmd)
+      .then(() => this.output?.appendLine("Linting successful"))
+      .catch((error: any) => {
+        lintResults = error.stderr;
+        this.output?.appendLine("Linting failed");
+      });
 
     process.chdir(curdir)
 
