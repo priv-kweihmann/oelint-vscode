@@ -49,21 +49,18 @@ export function activate(context: vscode.ExtensionContext) {
   output.appendLine('oelint-adv extension activated');
   logOelintVersion(output);
 
-  let events = vscode.commands.registerCommand(commandId, () => {
-    vscode.workspace.onDidSaveTextDocument((document: vscode.TextDocument) => {
-      if(document.languageId !== 'bitbake') {
-        return;
-      }
+  const saveListener = vscode.workspace.onDidSaveTextDocument((document: vscode.TextDocument) => {
+    if (document.languageId !== 'bitbake') {
+      return;
+    }
 
-      output.appendLine(`Linting on save: ${document.uri.fsPath}`);
-      output.show(true);
-      doLint(document, diagnosticCollection, output);
-    });
+    output.appendLine(`Linting on save: ${document.uri.fsPath}`);
+    void doLint(document, diagnosticCollection, output);
   });
 
-  vscode.commands.executeCommand(commandId);
-  context.subscriptions.push(events);
+  context.subscriptions.push(saveListener);
   context.subscriptions.push(output);
+  context.subscriptions.push(diagnosticCollection);
 
   // do auto update
   doUpdate();
